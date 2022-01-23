@@ -1,4 +1,4 @@
-FROM node:14.17.4-alpine AS node-build
+FROM node:14-alpine AS node-build
 WORKDIR /usr/src/app
 COPY package.json ./
 COPY yarn.lock ./
@@ -8,7 +8,7 @@ RUN yarn install --frozen-lockfile --check-files
 RUN yarn build --noninteractive
 RUN yarn install --frozen-lockfile --check-files --production --modules-folder node_modules_prod
 
-FROM node:14.17.4-alpine
+FROM node:14-alpine
 WORKDIR /usr/src/app
 ENV NODE_ENV production
 RUN mkdir -p /node_modules
